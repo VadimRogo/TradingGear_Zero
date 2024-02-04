@@ -367,9 +367,12 @@ whiteList = ['AAVEUSDT', 'ADAUSDT', 'APEUSDT', 'APTUSDT', 'ARBUSDT', 'ATOMUSDT',
 print(f'Len of white list is {len(whiteList)}')
 
 for coin in whiteList:
-    makeObject(coin)
-    getLastMinuteData(objects[-1].symbol)
-    update_dataframe(objects[-1].dataframe)
+    try:
+        makeObject(coin)
+        getLastMinuteData(objects[-1].symbol)
+        update_dataframe(objects[-1].dataframe)
+    except Exception as E:
+        whiteList.remove(coin)
 
 for i in range(1400):
     for object in objects:
