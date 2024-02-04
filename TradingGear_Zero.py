@@ -58,12 +58,12 @@ def open_order(symbol, side, quantity, price):
     response = requests.post(url=url, headers=header, params=params)
     print(response.text)
 
-# open_order(symbol, 'BUY', quantity, price)
-# x = json.loads(get_account_information())
-# symbol = 'BTCUSDT'
-# for i in x['balances']:
-#     if i['asset'] == symbol.replace('USDT', ''):
-#         print(i['free'])
-# print(x['balances'])
+open_order(symbol, 'BUY', quantity, price)
+x = json.loads(get_account_information())
+symbol = 'BTCUSDT'
+for i in x['balances']:
+    if i['asset'] == symbol.replace('USDT', ''):
+        print(i['free'])
+print(x['balances'])
     
 open_order(symbol, 'BUY', quantity, price)
