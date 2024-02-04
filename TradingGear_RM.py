@@ -14,6 +14,7 @@ import time
 import requests
 import hmac
 import hashlib
+import json
 from telebot import types
 
 bot = telebot.TeleBot('6312689394:AAE0wejoCqGdUDprRpXjIc401zCmN21SVl4')
@@ -209,7 +210,7 @@ def makeWhiteList(coins):
 def buy(symbol, price):
     try:
         timestamp = int(time.time() * 1000)
-        accountInformation = get_account_information()
+        accountInformation = json.loads(get_account_information())
         for i in accountInformation['balances']:
             if i['asset'] == 'USDT':
                 balance_usdt = float(i['free'])
@@ -263,7 +264,7 @@ def buy(symbol, price):
 
 def sell(ticket):
     try:
-        accountInformation = get_account_information()
+        accountInformation = json.loads(get_account_information())
         for i in accountInformation['balances']:
             if i['asset'] == ticket.symbol[0].replace('USDT', ''):
                 balance_coin = float(i['free'])
@@ -291,7 +292,7 @@ def sell(ticket):
             ticket.sold = list(ticket.sold)
             ticket.sold[0] = True
         else:
-            accountInformation = get_account_information()
+            accountInformation = json.loads(get_account_information())
             for i in accountInformation['balances']:
                 if i['asset'] == ticket.symbol[0].replace('USDT', ''):
                     balance_coin = float(i['free'])
@@ -323,7 +324,7 @@ def sell(ticket):
             # print(type(ticket.quantity, ticket.quantity[0], ticket.step, ticket.step[0]))
     except Exception as E:
         print(E)
-        accountInformation = get_account_information()
+        accountInformation = json.loads(get_account_information())
         for i in accountInformation['balances']:
             if i['asset'] == ticket.symbol[0].replace('USDT', ''):
                 balance_coin = float(i['free'])
