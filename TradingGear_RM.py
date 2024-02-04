@@ -208,9 +208,11 @@ def makeWhiteList(coins):
             continue
 
 def buy(symbol, price):
+    global timestamp
     try:
         timestamp = int(time.time() * 1000)
         accountInformation = json.loads(get_account_information())
+        print(accountInformation)
         for i in accountInformation['balances']:
             if i['asset'] == 'USDT':
                 balance_usdt = float(i['free'])
@@ -263,7 +265,9 @@ def buy(symbol, price):
         print(E)
 
 def sell(ticket):
+    global timestamp
     try:
+        timestamp = int(time.time() * 1000)
         accountInformation = json.loads(get_account_information())
         for i in accountInformation['balances']:
             if i['asset'] == ticket.symbol[0].replace('USDT', ''):
@@ -324,6 +328,7 @@ def sell(ticket):
             # print(type(ticket.quantity, ticket.quantity[0], ticket.step, ticket.step[0]))
     except Exception as E:
         print(E)
+        timestamp = int(time.time() * 1000)
         accountInformation = json.loads(get_account_information())
         for i in accountInformation['balances']:
             if i['asset'] == ticket.symbol[0].replace('USDT', ''):
