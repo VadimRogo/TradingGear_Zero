@@ -245,7 +245,7 @@ def buy(symbol, price):
             param_str = param_str[1:]
             params['signature'] = get_signature(param_str)
             response = requests.post(url=url, headers=header, params=params)
-            accountInformation = get_account_information()
+            accountInformation = json.loads(get_account_information())
             for i in accountInformation['balances']:
                 if i['asset'] == symbol.replace('USDT', ''):
                     balance_coin = float(i['free'])
