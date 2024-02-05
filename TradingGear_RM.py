@@ -37,6 +37,7 @@ client = Client(api_key, api_secret)
 partOfBalance = 11
 objects = []
 tickets = []
+balance_coin = 0
 counterProfit = 1 
 info = client.futures_exchange_info()
 
